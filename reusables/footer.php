@@ -1,7 +1,9 @@
 <footer>
     <div class="container">
         <div id="footer-logo-box">
-            <a href="index.php" class="footer-logo text-uppercase">E-Bookstore</a>
+            <a href="index.php" class="footer-logo text-uppercase"> 
+                    <img src="images\ewb-logo.jpeg" class="img-fluid" alt="ewbLOGO" width = 60px;>
+                </a>
         </div>
         <div id="footer-nav-links">
             <ul>
