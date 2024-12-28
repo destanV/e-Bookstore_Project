@@ -15,12 +15,11 @@
         rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
-        /* Custom Styling for Book Items */
         .book-item {
-            margin-bottom: 30px; /* Add space between items */
+            margin-bottom: 30px;
             padding: 15px;
-            border: 1px solid #ddd; /* Optional: Add border to book items */
-            border-radius: 5px; /* Optional: Rounded corners for book items */
+            border: 1px solid #ddd;
+            border-radius: 5px;
         }
 
         .book-photo {
@@ -43,7 +42,7 @@
         }
 
         .container {
-            margin-top: 30px; /* Space above the book list */
+            margin-top: 30px;
         }
     </style>
 </head>
@@ -56,11 +55,7 @@
 
         <div class="container">
             <h1 class="mb-4">Shop Page</h1>
-
-            <!-- Example Book Items Container -->
-            <div id="book-list">
-                <!-- Book Items Will Be Inserted Dynamically -->
-            </div>
+            <div id="book-list"></div>
         </div>
     </main>
 
@@ -69,68 +64,62 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     
-    <!-- JavaScript Logic -->
     <script>
-        // Mock Data: Replace with data fetched from your database
-        const books = [
+        var books = [
             {
                 id: 1,
                 name: "Book 1",
-                author: "Author 1",
-                language: "English",
-                genre: "Fiction",
+                author: "",
+                language: "",
+                genre: "",
                 pages: 300,
                 photo: "images/book-minimalistic-d.svg"
             },
             {
                 id: 2,
-                name: "Book 2",
-                author: "Author 2",
-                language: "Turkish",
-                genre: "Mystery",
+                name: "",
+                author: " ",
+                language: "",
+                genre: "",
                 pages: 250,
-                photo: ""
+                photo: "images/book-minimalistic-d.svg"
             },
             {
                 id: 3,
-                name: "Book 3",
-                author: "Author 3",
-                language: "Russian",
-                genre: "Science Fiction",
+                name: " ",
+                author: " ",
+                language: "",
+                genre: " ",
                 pages: 400,
-                photo: ""
+                photo: "images/book-minimalistic-d.svg"
             }
         ];
 
-        // Function to Render Books
         function renderBooks() {
             const bookList = document.getElementById("book-list");
-            bookList.innerHTML = ""; // Clear existing items
+            bookList.innerHTML = ""; 
 
             books.forEach((book) => {
-                // Create Book Item Container
                 const bookItem = document.createElement("div");
                 bookItem.classList.add("row", "book-item");
                
-                // Book Photo
                 const photoCol = document.createElement("div");
                 photoCol.classList.add("col-md-2");
 
                 if (book.photo && book.photo.trim() !== "") {
                     const img = document.createElement("img");
-                    img.src = book.photo; // Set photo source
-                    img.alt = book.name; // Set alt text for accessibility
-                    img.classList.add("img-fluid"); // Responsive image
-                    img.style.maxHeight = "120px"; // Optional: Limit height
+                    img.src = book.photo;
+                    img.alt = book.name;
+                    img.classList.add("img-fluid");
+                    img.style.maxHeight = "120px";
                     photoCol.appendChild(img);
                 } else {
                     const photoDiv = document.createElement("div");
-                    photoDiv.classList.add("book-photo", "d-flex", "align-items-center", "justify-content-center");
-                    photoDiv.textContent = "No Photo Available"; // Placeholder
+                    photoDiv.classList.add("book-photo");
+                    photoDiv.textContent = "No Photo Available";
                     photoCol.appendChild(photoDiv);
                 }
 
-                // Book Details
                 const detailsCol = document.createElement("div");
                 detailsCol.classList.add("col-md-8", "book-details");
                 detailsCol.innerHTML = `
@@ -141,7 +130,6 @@
                     <p><strong>Pages:</strong> ${book.pages}</p>
                 `;
 
-                // Action Buttons
                 const actionCol = document.createElement("div");
                 actionCol.classList.add("col-md-2", "action-buttons");
                 actionCol.innerHTML = `
@@ -153,31 +141,27 @@
                     </button>
                 `;
 
-                // Append Columns to Book Item
                 bookItem.appendChild(photoCol);
                 bookItem.appendChild(detailsCol);
                 bookItem.appendChild(actionCol);
 
-                // Append Book Item to List
                 bookList.appendChild(bookItem);
             });
         }
 
-        // Function to Handle Add to Basket
         function addToBasket(bookId) {
             alert(`Book with ID ${bookId} added to Basket!`);
         }
 
-        // Function to Handle Add to Wishlist
         function addToWishlist(bookId) {
             alert(`Book with ID ${bookId} added to Wishlist!`);
         }
 
-        // Render Books on Page Load
         renderBooks();
     </script>
 
 </body>
 </html>
+
 
 
