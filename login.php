@@ -22,7 +22,7 @@
 
 <body>
     <?php include 'reusables/navbar.php'; ?>
- <main>   <main>
+ <main> 
         <div class="container pb-5">
             <div class="row justify-content-center">
                 <div class="col-md-6">
@@ -52,7 +52,7 @@
                 </div>
             </div>
         </div>
-    </main></main>
+    </main>
     
     <?php include 'reusables/footer.php'; ?>
 

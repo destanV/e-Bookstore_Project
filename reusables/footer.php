@@ -8,7 +8,7 @@
         <div id="footer-nav-links">
             <ul>
                 <li class="footer-nav-item text-uppercase" style="float:left">
-                    <a href="#" class="footer-nav-link">About Us</a>
+                    <a href="about.php" class="footer-nav-link">About Us</a>
                 </li>
                 <li class="footer-nav-item"><a href="#" class="text-decoration-none" target="_blank">
                         <i class="fab fa-instagram fa-2x"></i>

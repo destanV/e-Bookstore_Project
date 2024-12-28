@@ -123,6 +123,7 @@ header h1{
 main{
  flex:1;
   padding-top: 120px;
+  background-color:#ffffeb !important;
 }
 footer {
   width: 100%;
@@ -175,4 +176,14 @@ footer {
 #ismatching {
   min-height: 1.5em;
   line-height: 1.5; 
+}
+.lead {
+  font-size: 15px;
+  font-weight: 500; 
+  color: #FFFFEB;
+  line-height: 1.6; 
+}
+
+.bg-cream{
+  background-color: #ffffcb !important;
 }
