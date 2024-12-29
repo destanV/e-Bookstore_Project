@@ -26,7 +26,7 @@
 
         .book-photo {
             height: 120px;
-            background-color: #f4f4f4;
+            background-color: #ffffeb;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -54,7 +54,7 @@
     <main>
         <?php include 'reusables/searchbar.php'; ?>
 
-        <div class="container" style="margin-top:3rem;">
+        <div class="container bg-cream" style="margin-top:3rem;">
             <h1 class="mb-4">Shop Page</h1>
             <div id="book-list"></div>
         </div>
@@ -68,8 +68,8 @@
         var books = [
             {
                 id: 1,
-                name: "Book 1",
-                author: "",
+                name: " Book 1",
+                author: " Author 1",
                 language: "",
                 genre: "",
                 pages: 300,
@@ -77,8 +77,8 @@
             },
             {
                 id: 2,
-                name: "",
-                author: " ",
+                name: " Book 2",
+                author: " Author 2 ",
                 language: "",
                 genre: "",
                 pages: 250,
@@ -86,8 +86,8 @@
             },
             {
                 id: 3,
-                name: " ",
-                author: " ",
+                name: " Book 3",
+                author: " Author 3",
                 language: "",
                 genre: " ",
                 pages: 400,
@@ -123,11 +123,9 @@
                 const detailsCol = document.createElement("div");
                 detailsCol.classList.add("col-md-8", "book-details");
                 detailsCol.innerHTML = `
-                    <h5>${book.name}</h5>
-                    <p><strong>Author:</strong> ${book.author}</p>
-                    <p><strong>Language:</strong> ${book.language}</p>
-                    <p><strong>Genre:</strong> ${book.genre}</p>
-                    <p><strong>Pages:</strong> ${book.pages}</p>
+                    <h4>${book.name}</h4>
+                    <p>${book.author}</p>
+                    
                 `;
 
                 const actionCol = document.createElement("div");
