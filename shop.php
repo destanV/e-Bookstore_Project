@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <title>E-bookstore</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Shop</title>
+   
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
-        rel="stylesheet">
+        <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    
     <style>
         .book-item {
             margin-bottom: 30px;
@@ -24,7 +26,7 @@
 
         .book-photo {
             height: 120px;
-            background-color: #f4f4f4;
+            background-color: #ffffeb;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -41,19 +43,18 @@
             margin-bottom: 10px;
         }
 
-        .container {
-            margin-top: 30px;
-        }
+
     </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <?php include 'reusables/navbar.php'; ?>
 
     <main>
-        <?php include 'reusables/searchbar copy.php'; ?>
+        <?php include 'reusables/searchbar.php'; ?>
 
-        <div class="container">
+        <div class="container bg-cream" style="margin-top:3rem;">
             <h1 class="mb-4">Shop Page</h1>
             <div id="book-list"></div>
         </div>
@@ -61,15 +62,14 @@
 
     <?php include 'reusables/footer.php'; ?>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+   
     
     <script>
         var books = [
             {
                 id: 1,
-                name: "Book 1",
-                author: "",
+                name: " Book 1",
+                author: " Author 1",
                 language: "",
                 genre: "",
                 pages: 300,
@@ -77,8 +77,8 @@
             },
             {
                 id: 2,
-                name: "",
-                author: " ",
+                name: " Book 2",
+                author: " Author 2 ",
                 language: "",
                 genre: "",
                 pages: 250,
@@ -86,8 +86,8 @@
             },
             {
                 id: 3,
-                name: " ",
-                author: " ",
+                name: " Book 3",
+                author: " Author 3",
                 language: "",
                 genre: " ",
                 pages: 400,
@@ -123,11 +123,9 @@
                 const detailsCol = document.createElement("div");
                 detailsCol.classList.add("col-md-8", "book-details");
                 detailsCol.innerHTML = `
-                    <h5>${book.name}</h5>
-                    <p><strong>Author:</strong> ${book.author}</p>
-                    <p><strong>Language:</strong> ${book.language}</p>
-                    <p><strong>Genre:</strong> ${book.genre}</p>
-                    <p><strong>Pages:</strong> ${book.pages}</p>
+                    <h4>${book.name}</h4>
+                    <p>${book.author}</p>
+                    
                 `;
 
                 const actionCol = document.createElement("div");
@@ -159,7 +157,8 @@
 
         renderBooks();
     </script>
-
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+ integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
 
