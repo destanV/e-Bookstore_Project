@@ -6,8 +6,8 @@
   background-color:#FFFFEB !important;
 }
 .btn-primary {
-  background-color: #049F4C;
-  border-color: #049F4C; }
+  background-color: #049F4C !important;
+  border-color: #049F4C !important;}
 
 .btn-primary:hover {
   background-color: #05C760; /* Custom color on hover */
