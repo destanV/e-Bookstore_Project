@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -44,6 +45,8 @@
         }
 
 
+
+
     </style>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -63,6 +66,7 @@
     <?php include 'reusables/footer.php'; ?>
 
    
+
     
     <script>
         var books = [
@@ -123,9 +127,17 @@
                 const detailsCol = document.createElement("div");
                 detailsCol.classList.add("col-md-8", "book-details");
                 detailsCol.innerHTML = `
-                    <h4>${book.name}</h4>
-                    <p>${book.author}</p>
+                                      <h4>
+                                           <a href="bookdetails.php?name=${encodeURIComponent(book.name)}&author=${encodeURIComponent(book.author)}&language=${encodeURIComponent(book.language)}&genre=${encodeURIComponent(book.genre)}&pages=${book.pages}&photo=${encodeURIComponent(book.photo)}">
+                                              ${book.name}
+                                           </a>
+                                      </h4>
+                                      <p>${book.author}</p>
+
+
                     
+
+
                 `;
 
                 const actionCol = document.createElement("div");
@@ -161,6 +173,3 @@
  integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
-
-
-
