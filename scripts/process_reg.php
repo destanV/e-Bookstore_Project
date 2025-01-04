@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $sql = "INSERT INTO user (username, email, password) VALUES ('$username', '$email', '$password')";//insert into db
 
         if (mysqli_query($conn, $sql)) {
-            echo "<script>alert('Registration successful!'); window.location.href='login.php';</script>";
+            echo "<script>alert('Registration successful!'); window.location.href='../login.php';</script>";
         } else {
             echo "<script>alert('Error: " . mysqli_error($conn) . "'); window.history.back();</script>";
         }
