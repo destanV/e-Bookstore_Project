@@ -26,7 +26,10 @@
             document.getElementById('ismatching').innerText = "Passwords do not match";
             return false;
         }
-        else if (first.length < 8 && first) { document.getElementById('ismatching').innerText = "Password must be at least 8 characters"; }
+        else if (first.length < 8 && first) 
+        { document.getElementById('ismatching').innerText = "Password must be at least 8 characters"; 
+            return false;
+        }
         else {
             document.getElementById('ismatching').innerText = "";
             return true;
@@ -38,51 +41,50 @@
 <body>
     <?php include 'reusables/navbar.php'; ?>
     <main>
-        <main>
-            <div class="container pb-5">
-                <div class="row justify-content-center">
-                    <div class="col-md-6">
-                        <div class="card shadow-sm">
-                            <div class="card-header text-center bg-dark text-white">
-                                <h3>Sign Up</h3>
-                            </div>
-                            <div class="card-body">
-                                <form action="process_reg.php" method="POST">
-                                    <div class="mb-3">
-                                        <label for="username" class="form-label">Username</label>
-                                        <input type="text" class="form-control" id="username" name="username" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="email" class="form-label">E-mail</label>
-                                        <input type="text" class="form-control" id="email" name="email" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="password" class="form-label">Password</label>
-                                        <input type="password" class="form-control" id="password" name="password"
-                                            oninput="validate()" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="password" class="form-label">Repeat Password</label>
-                                        <input type="password" class="form-control" id="repeat" name="repeat"
-                                            oninput="validate()" required>
-                                    </div>
-                                    <div class="mb-3 text-danger text-center" id="ismatching"
-                                        style="min-height: 1.5em; line-height: 1.5;">
-                                        <label for="ismatching" class="form-label"></label>
-                                    </div>
-                                    <div class="d-grid">
-                                        <button type="submit" class="btn btn-primary">Create Account</button>
-                                    </div>
-                                </form>
-                            </div>
-
+        <div class="container pb-5">
+            <div class="row justify-content-center mt-5">
+                <div class="col-md-6">
+                    <div class="card shadow-sm">
+                        <div class="card-header text-center bg-dark text-white">
+                            <h3>Sign Up</h3>
                         </div>
+                        <div class="card-body">
+                            <form action="scripts/process_reg.php" method="POST" onsubmit="return validate();">
+                                <div class="mb-3">
+                                    <label for="username" class="form-label">Username</label>
+                                    <input type="text" class="form-control" id="username" name="username" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">E-mail</label>
+                                    <input type="text" class="form-control" id="email" name="email" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Password</label>
+                                    <input type="password" class="form-control" id="password" name="password"
+                                        oninput="validate()" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Repeat Password</label>
+                                    <input type="password" class="form-control" id="repeat" name="repeat"
+                                        oninput="validate()" required>
+                                </div>
+                                <div class="mb-3 text-danger text-center" id="ismatching"
+                                    style="min-height: 1.5em; line-height: 1.5;">
+                                    <label for="ismatching" class="form-label"></label>
+                                </div>
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-primary">Create Account</button>
+                                </div>
+                            </form>
+                        </div>
+
                     </div>
                 </div>
             </div>
-        </main>
+        </div>
     </main>
-    
+    </main>
+
     <?php include 'reusables/footer.php'; ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
