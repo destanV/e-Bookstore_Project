@@ -21,6 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $user = mysqli_fetch_assoc($result);
         $_SESSION['username'] = $user['username']; //start session with 2 variables
         $_SESSION['user_id'] = $user['id'];
+        $_SESSION['email'] = $user['email'];
 
         //go to index
         header("Location: ../index.php");
