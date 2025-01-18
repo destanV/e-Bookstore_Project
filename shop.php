@@ -76,7 +76,7 @@ $conn->close();
                     <div class="row book-item">
                         <div class="col-md-2">
                             <?php if (!empty($book['photo'])): ?>
-                                <img src="<?= $book['photo'] ?>" alt="<?= htmlspecialchars($book['name']) ?>" class="img-fluid" style="max-height: 120px;">
+                                <img src="<?= htmlspecialchars($book['photo']) ?>" alt="<?= htmlspecialchars($book['name']) ?>" class="img-fluid" style="max-height: 120px;">
                             <?php else: ?>
                                 <div class="book-photo">No Photo Available</div>
                             <?php endif; ?>
@@ -90,10 +90,12 @@ $conn->close();
                         </div>
 
                         <div class="col-md-2 action-buttons">
-                            <button class="btn btn-primary btn-sm mb-2" onclick="addToBasket(<?= $book['id'] ?>)">
-                                <i class="bi bi-cart-plus"></i> Add to Basket
-                            </button>
-
+                            <form method="POST" action="scripts/add_to_basket.php">
+                                <input type="hidden" name="book_id" value="<?= htmlspecialchars($book['id']) ?>">
+                                <button type="submit" class="btn btn-primary btn-sm mb-2">
+                                    <i class="bi bi-cart-plus"></i> Add to Basket
+                                </button>
+                            </form>
                         </div>
                     </div>
                 <?php endforeach; ?>
@@ -102,13 +104,6 @@ $conn->close();
     </main>
 
     <?php include 'reusables/footer.php'; ?>
-
-    <script>
-        function addToBasket(bookId) {
-            alert(`Book with ID ${bookId} added to Basket!`);
-        }
-
- 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
