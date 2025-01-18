@@ -1,3 +1,47 @@
+<?php
+// Database connection
+$db_host = 'localhost'; 
+$db_user = 'ewb_user';           
+$db_pass = 'abc1';
+$db_name = 'ewb';               
+
+$conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Query to fetch books with author and language details
+$query = "SELECT books.book_id, books.book_name, books.numberOfPages, 
+          author.auth_name, language.language_name 
+          FROM books 
+          LEFT JOIN author ON books.auth_id = author.auth_id
+          LEFT JOIN language ON books.language_id = language.language_id"; // Join with language table
+
+$result = $conn->query($query);
+
+// Check if we got the result
+if ($result && $result->num_rows > 0) {
+    $books_from_db = [];
+    while ($book = $result->fetch_assoc()) {
+        // Store each book along with the author name and language name
+        $books_from_db[] = [
+            'id' => $book['book_id'],
+            'name' => $book['book_name'],
+            'author' => $book['auth_name'],  // Get author name
+            'language' => $book['language_name'],  // Get language name
+            'pages' => $book['numberOfPages'],
+            'photo' => 'images/book-minimalistic-d.svg'  // Placeholder photo
+        ];
+    }
+} else {
+    // If no books are found, provide a fallback (empty array)
+    $books_from_db = [];
+}
+
+$conn->close();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,7 +91,6 @@
 </head>
 
 <body>
-
     <?php include 'reusables/navbar.php'; ?>
 
     <main>
@@ -55,110 +98,43 @@
 
         <div class="container bg-cream" style="margin-top:3rem;">
             <h1 class="mb-4">Shop Page</h1>
-            <div id="book-list"></div>
+            <div id="book-list">
+                <?php 
+                // Render the books (fetched from the database)
+                foreach ($books_from_db as $book): ?>
+                    <div class="row book-item">
+                        <div class="col-md-2">
+                            <?php if (!empty($book['photo'])): ?>
+                                <img src="<?= $book['photo'] ?>" alt="<?= htmlspecialchars($book['name']) ?>" class="img-fluid" style="max-height: 120px;">
+                            <?php else: ?>
+                                <div class="book-photo">No Photo Available</div>
+                            <?php endif; ?>
+                        </div>
+
+                        <div class="col-md-8 book-details">
+                            <h4><a href="bookdetails.php?name=<?= urlencode($book['name']) ?>&author=<?= urlencode($book['author']) ?>&language=<?= urlencode($book['language']) ?>&pages=<?= $book['pages'] ?>&photo=<?= urlencode($book['photo']) ?>"><?= htmlspecialchars($book['name']) ?></a></h4>
+                            <p>Author: <?= htmlspecialchars($book['author']) ?></p>
+                            <p>Language: <?= htmlspecialchars($book['language']) ?></p>
+                            <p>Pages: <?= htmlspecialchars($book['pages']) ?></p>
+                        </div>
+
+                        <div class="col-md-2 action-buttons">
+                            <button class="btn btn-primary btn-sm mb-2" onclick="addToBasket(<?= $book['id'] ?>)">
+                                <i class="bi bi-cart-plus"></i> Add to Basket
+                            </button>
+                            <button class="btn btn-secondary btn-sm" onclick="addToWishlist(<?= $book['id'] ?>)">
+                                <i class="bi bi-heart"></i> Add to Wishlist
+                            </button>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
         </div>
     </main>
 
     <?php include 'reusables/footer.php'; ?>
 
-
-
-
     <script>
-        var books = [
-            {
-                id: 1,
-                name: " Book 1",
-                author: " Author 1",
-                language: "",
-                genre: "",
-                pages: 300,
-                photo: "images/book-minimalistic-d.svg"
-            },
-            {
-                id: 2,
-                name: " Book 2",
-                author: " Author 2 ",
-                language: "",
-                genre: "",
-                pages: 250,
-                photo: "images/book-minimalistic-d.svg"
-            },
-            {
-                id: 3,
-                name: " Book 3",
-                author: " Author 3",
-                language: "",
-                genre: " ",
-                pages: 400,
-                photo: "images/book-minimalistic-d.svg"
-            }
-        ];
-
-        function renderBooks() {
-            const bookList = document.getElementById("book-list");
-            bookList.innerHTML = "";
-
-            books.forEach((book) => {
-                const bookItem = document.createElement("div");
-                bookItem.classList.add("row", "book-item");
-
-                const photoCol = document.createElement("div");
-                photoCol.classList.add("col-md-2");
-
-                if (book.photo && book.photo.trim() !== "") {
-                    const img = document.createElement("img");
-                    img.src = book.photo;
-                    img.alt = book.name;
-                    img.classList.add("img-fluid");
-                    img.style.maxHeight = "120px";
-                    photoCol.appendChild(img);
-                } else {
-                    const photoDiv = document.createElement("div");
-                    photoDiv.classList.add("book-photo");
-                    photoDiv.textContent = "No Photo Available";
-                    photoCol.appendChild(photoDiv);
-                }
-
-                const detailsCol = document.createElement("div");
-                detailsCol.classList.add("col-md-8", "book-details");
-                detailsCol.innerHTML = `
-                                      <h4>
-                                           <a href="bookdetails.php?name=${encodeURIComponent(book.name)}&author=${encodeURIComponent(book.author)}&language=${encodeURIComponent(book.language)}&genre=${encodeURIComponent(book.genre)}&pages=${book.pages}&photo=${encodeURIComponent(book.photo)}">
-                                              ${book.name}
-                                           </a>
-                                      </h4>
-                                      <p>${book.author}</p>
-
-
-                    
-
-
-                `;
-
-                const actionCol = document.createElement("div");
-                actionCol.classList.add("col-md-2", "action-buttons");
-                actionCol.innerHTML = `
-                    <form method="POST" action="scripts/add_to_basket.php">
-                     <input type="hidden" name="book_id" value="${book.id}">
-                                     <button type="submit" class="btn btn-primary btn-sm mb-2">
-                                       <i class="bi bi-cart-plus"></i> Add to Basket
-                             </button>
-                        </form>
-
-                    <button class="btn btn-secondary btn-sm" onclick="addToWishlist(${book.id})">
-                        <i class="bi bi-heart"></i> Add to Wishlist
-                    </button>
-                `;
-
-                bookItem.appendChild(photoCol);
-                bookItem.appendChild(detailsCol);
-                bookItem.appendChild(actionCol);
-
-                bookList.appendChild(bookItem);
-            });
-        }
-
         function addToBasket(bookId) {
             alert(`Book with ID ${bookId} added to Basket!`);
         }
@@ -166,8 +142,6 @@
         function addToWishlist(bookId) {
             alert(`Book with ID ${bookId} added to Wishlist!`);
         }
-
-        renderBooks();
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
