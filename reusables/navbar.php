@@ -12,16 +12,14 @@ $current_page = basename($_SERVER['PHP_SELF']);
         <li class="nav-item text-uppercase">
           <a href="index.php" class="nav-link <?php echo $current_page == 'index.php' ? 'active' : ''; ?>">Home</a>
         </li>
-
-        <li class="nav-item text-uppercase">
-          <a href="contact.php"
-            class="nav-link <?php echo $current_page == 'contact.php' ? 'active' : ''; ?>">Contact</a>
-        </li>
         <?php
         if (isset($_SESSION['username'])) {
           echo <<<HTML
     <li class="nav-item text-uppercase">
         <a href="profile.php" class="nav-link" id="navbarProfile">Profile</a>
+    </li>
+    <li class="nav-item text-uppercase">
+        <a href="basket.php" class="nav-link" id="navbarBasket">Basket</a>
     </li>
     <li class="nav-item text-uppercase">
         <a href="scripts/logout.php" class="nav-link" id="navbarLogout">Log Out</a>

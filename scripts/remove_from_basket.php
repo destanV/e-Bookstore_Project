@@ -58,7 +58,7 @@ if ($delStatement->execute()) {
         $basketQuery->close();
     }
 
-    header("Location: basket.php");
+    header("Location: ../basket.php");
 } else {
     echo "Error removing item: " . $conn->error;
 }

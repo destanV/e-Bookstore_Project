@@ -68,6 +68,9 @@ padding-right:0.5rem;
 .text-uppercase{
   text-transform: uppercase;
 }
+.text-emerald{
+  color:#05C760 !important;
+}
 #logo-box{
   float:left;
   padding-top:1.8rem;
@@ -193,4 +196,7 @@ footer {
 
 .bg-cream{
   background-color: #ffffcb !important;
+}
+.bg-primary{
+  background-color:#049F4C !important;
 }

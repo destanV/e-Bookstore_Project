@@ -115,9 +115,9 @@ $result = $stmt->get_result();
                                 <input type="hidden" name="book_id" value="<?= $row['book_id'] ?>">
                                 <button type="submit" class="btn btn-danger btn-sm">Remove</button>
                             </form>
-                            <form method="POST" action="scripts/purchase_item.php">
+                            <form method="POST">
                                 <input type="hidden" name="book_id" value="<?= $row['book_id'] ?>">
-                                <button type="submit" class="btn btn-success btn-sm">Purchase</button>
+                                <button type="submit" class="btn btn-success btn-sm" onclick="purchaseAlert()">Purchase</button>
                             </form>
                         </div>
                     </div>
@@ -133,6 +133,11 @@ $result = $stmt->get_result();
         </div>
     </main>
         <?php include 'reusables/footer.php'; ?>
+        <script>
+            function purchaseAlert(){
+                alert("purchase not implemented yet");
+            }
+        </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
