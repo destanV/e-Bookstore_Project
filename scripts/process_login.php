@@ -19,9 +19,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (mysqli_num_rows($result) > 0) {//check user exist
         $user = mysqli_fetch_assoc($result);
-        $_SESSION['username'] = $user['username']; //start session with 2 variables
-        $_SESSION['user_id'] = $user['id'];
-
+        $_SESSION['username'] = $user['username']; //start session with 3 variables
+        $_SESSION['user_id'] = $user['user_id'];
+        $_SESSION['role'] = $user['role'];
         //go to index
         header("Location: ../index.php");
         exit();

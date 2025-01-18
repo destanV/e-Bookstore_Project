@@ -16,6 +16,7 @@
       href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
       rel="stylesheet"
     />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -26,7 +27,7 @@
                 <div class="col-md-10">
                     <h1 class="text-center mb-4" style="color:#049F4C">About Us</h1>
                     <div class="card shadow-sm">
-                        <div class="card-body bg-light text-dark">
+                        <div class="card-body bg-cream text-dark">
                             <p class="lead text-dark text-small" style="font-size:30px;">
                                 Welcome to <strong>E-Bookstore</strong>. 
                                 We aim to make reading accessible for everyone.

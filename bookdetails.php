@@ -65,6 +65,7 @@
         $genre = $_GET['genre'] ?? 'Unknown Genre';
         $pages = $_GET['pages'] ?? 'Unknown Number of Pages';
         $photo = $_GET['photo'] ?? 'images/book-minimalistic-d.svg'; // Default photo
+        $year = $_GET['year'] ?? "unknown year";
         ?>
 
         <h1>Book Details</h1>

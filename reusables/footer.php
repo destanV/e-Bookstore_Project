@@ -24,10 +24,10 @@
         <div id="footer-nav-links">
             <ul class="list-unstyled d-flex mb-0">
                 <li class="footer-nav-item text-uppercase me-3">
-                    <a href="#" class="footer-nav-link">About Us</a>
+                    <a href="about.php" class="footer-nav-link">About Us</a>
                 </li>
                 <li class="footer-nav-item text-uppercase">
-                    <a href="#" class="footer-nav-link">Contact</a>
+                    <a href="contact.php" class="footer-nav-link">Contact</a>
                 </li>
             </ul>
         </div>
