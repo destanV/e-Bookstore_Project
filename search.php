@@ -119,8 +119,7 @@ $conn->close();
                                 <button class="btn btn-primary btn-sm mb-2" onclick="addToBasket(<?= $book['id'] ?>)">
                                     <i class="bi bi-cart-plus"></i> Add to Basket
                                 </button>
-                                <button class="btn btn-secondary btn-sm" onclick="addToWishlist(<?= $book['id'] ?>)">
-                                    <i class="bi bi-heart"></i> Add to Wishlist
+                            
                                 </button>
                             </div>
                         </div>
@@ -139,10 +138,6 @@ $conn->close();
             alert(`Book with ID ${bookId} added to Basket!`);
         }
 
-        function addToWishlist(bookId) {
-            alert(`Book with ID ${bookId} added to Wishlist!`);
-        }
-    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
