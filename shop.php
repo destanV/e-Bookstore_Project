@@ -131,7 +131,7 @@ $conn->close();
                             <p>Genre: <?= htmlspecialchars($book['genre']) ?></p>
                         </div>
                         <div class="col-md-2 action-buttons">
-                            <form method="POST" action="scripts/add2.php">
+                            <form method="POST" action="scripts/add_to_basket.php">
                                 <input type="hidden" name="book_id" value="<?= urlencode($book['id']) ?>">
                                 <button type="submit" class="btn btn-primary">Add to Basket</button>
                             </form>

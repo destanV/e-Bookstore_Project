@@ -1,7 +1,7 @@
 <div class="container mt-5">
   <div class="row">
     <div class="col-12">
-      <form method="GET" action="search.php"> <!-- Corrected method and action -->
+      <form method="GET" action="shop.php"> <!-- Corrected method and action -->
         <!-- Search Bar -->
         <div class="input-group mb-3">
           <input type="text" class="form-control" id="search-input" name="search_query" placeholder="Search by title..." aria-label="Search">
@@ -30,21 +30,7 @@
                   <option value="" selected>Choose Language</option>
                   <option value="1">English</option>
                   <option value="2">Turkish</option>
-                  <option value="3">Russian</option>
-                  <option value="4">Spanish</option>
                 </select>
-              </div>
-
-              <!-- Number of Pages (Range) -->
-              <div class="col-md-4">
-                <div class="row g-2">
-                  <div class="col-6">
-                    <input type="number" class="form-control" id="min-pages" name="min_pages" placeholder="Min pages" aria-label="Min Pages">
-                  </div>
-                  <div class="col-6">
-                    <input type="number" class="form-control" id="max-pages" name="max_pages" placeholder="Max pages" aria-label="Max Pages">
-                  </div>
-                </div>
               </div>
             </div>
           </div>

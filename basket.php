@@ -1,44 +1,6 @@
-<?php
-// Start the session
-session_start();
-
-// Include database configuration
-include 'scripts/db_config.php';
-
-// Check if the user is logged in
-if (!isset($_SESSION['user_id'])) {
-    // Redirect unauthenticated users to the login page
-    header("Location: login.php");
-    exit();
-}
-
-// Get the user ID from the session
-$user_id = $_SESSION['user_id'];
-
-// Connect to the database
-$conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
-if ($conn->connect_error) {
-    die("<p class='text-danger'>Database connection failed: " . $conn->connect_error . "</p>");
-}
-
-// Fetch items in the basket for the logged-in user
-$sql = "SELECT b.book_id, b.book_name, a.auth_name, l.language_name 
-        FROM basket_items bi
-        JOIN basket ba ON bi.basket_id = ba.basket_id
-        JOIN books b ON bi.book_id = b.book_id
-        JOIN author a ON b.auth_id = a.auth_id
-        JOIN language l ON b.language_id = l.language_id
-        WHERE ba.user_id = ?";
-$stmt = $conn->prepare($sql);
-if (!$stmt) {
-    die("<p class='text-danger'>Failed to prepare query: " . $conn->error . "</p>");
-}
-$stmt->bind_param('i', $user_id);
-$stmt->execute();
-$result = $stmt->get_result();
-?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -89,11 +51,52 @@ $result = $stmt->get_result();
             margin-bottom: 10px;
         }
     </style>
-    </head>
-    <body>
-        <?php include 'reusables/navbar.php'; ?>   
-      
-        <main class="container mt-4">
+</head>
+
+<body>
+    <?php include 'reusables/navbar.php'; ?>
+    <?php
+    if (session_status() === PHP_SESSION_NONE) { //prevent double session start
+        session_start();
+    }
+
+    // Include database configuration
+    include 'scripts/db_config.php';
+
+    // Check if the user is logged in
+    if (!isset($_SESSION['user_id'])) {
+        // Redirect unauthenticated users to the login page
+        header("Location: login.php");
+        exit();
+    }
+
+    // Get the user ID from the session
+    $user_id = $_SESSION['user_id'];
+
+    // Connect to the database
+    $conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
+    if ($conn->connect_error) {
+        die("<p class='text-danger'>Database connection failed: " . $conn->connect_error . "</p>");
+    }
+
+    // Fetch items in the basket for the logged-in user
+    $sql = "SELECT b.book_id, b.book_name, a.auth_name, l.language_name 
+        FROM basket_items bi
+        JOIN basket ba ON bi.basket_id = ba.basket_id
+        JOIN books b ON bi.book_id = b.book_id
+        JOIN author a ON b.auth_id = a.auth_id
+        JOIN language l ON b.language_id = l.language_id
+        WHERE ba.user_id = ?";
+    $stmt = $conn->prepare($sql);
+    if (!$stmt) {
+        die("<p class='text-danger'>Failed to prepare query: " . $conn->error . "</p>");
+    }
+    $stmt->bind_param('i', $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    ?>
+
+    <main class="container mt-4">
         <h1 class="mb-4">Basket</h1>
         <div id="basket-list">
             <?php
@@ -103,7 +106,8 @@ $result = $stmt->get_result();
                     ?>
                     <div class="book-item">
                         <div class="book-photo">
-                            <img src="images/book-minimalistic-d.svg" alt="<?= htmlspecialchars($row['book_name']) ?>" style="max-height: 100%; max-width: 100%; border-radius: 5px;">
+                            <img src="images/book-minimalistic-d.svg" alt="<?= htmlspecialchars($row['book_name']) ?>"
+                                style="max-height: 100%; max-width: 100%; border-radius: 5px;">
                         </div>
                         <div class="book-details">
                             <h4><?= htmlspecialchars($row['book_name']) ?></h4>
@@ -132,13 +136,15 @@ $result = $stmt->get_result();
             ?>
         </div>
     </main>
-        <?php include 'reusables/footer.php'; ?>
-        <script>
-            function purchaseAlert(){
-                alert("purchase not implemented yet");
-            }
-        </script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <?php include 'reusables/footer.php'; ?>
+    <script>
+        function purchaseAlert() {
+            alert("purchase not implemented yet");
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>

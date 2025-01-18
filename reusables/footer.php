@@ -11,7 +11,7 @@
                 <li class="footer-nav-item me-3"><a href="#" class="text-decoration-none" target="_blank">
                     <i class="fab fa-instagram"></i>
                 </a></li>
-                <li class="footer-nav-item me-3"><a href="#" class="text-decoration-none" target="_blank">
+                <li class="footer-nav-item me-3"><a href="https://github.com/destanV/e-Bookstore_Project" class="text-decoration-none" target="_blank">
                     <i class="fab fa-github"></i>
                 </a></li>
                 <li class="footer-nav-item me-3"><a href="#" class="text-decoration-none" target="_blank">
