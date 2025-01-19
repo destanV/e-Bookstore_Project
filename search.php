@@ -77,10 +77,9 @@ $conn->close();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Shop</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Include the font from your previous design -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;700;900&display=swap" rel="stylesheet">
     <style>
-        /* Apply the desired font (Montserrat) */
         * {
             font-family: 'Montserrat', sans-serif;
         }
