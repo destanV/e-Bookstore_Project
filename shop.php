@@ -1,10 +1,5 @@
 <?php
-// Database connection
-$db_host = 'localhost'; 
-$db_user = 'ewb_user';           
-$db_pass = 'abc1';
-$db_name = 'ewb';               
-
+include "scripts/db_config.php";
 $conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
 
 if ($conn->connect_error) {
@@ -13,10 +8,11 @@ if ($conn->connect_error) {
 
 // Query to fetch books with author and language details
 $query = "SELECT books.book_id, books.book_name, books.numberOfPages, 
-          author.auth_name, language.language_name 
+          author.auth_name, language.language_name , genres.genre_name
           FROM books 
           LEFT JOIN author ON books.auth_id = author.auth_id
-          LEFT JOIN language ON books.language_id = language.language_id"; // Join with language table
+          LEFT JOIN language ON books.language_id = language.language_id
+          LEFT JOIN genres on books.genre_id = genres.genre_id";
 
 $result = $conn->query($query);
 
@@ -31,7 +27,9 @@ if ($result && $result->num_rows > 0) {
             'author' => $book['auth_name'],  // Get author name
             'language' => $book['language_name'],  // Get language name
             'pages' => $book['numberOfPages'],
-            'photo' => 'images/book-minimalistic-d.svg'  // Placeholder photo
+            'photo' => 'images/book-minimalistic-d.svg',
+            'genre' => $book['genre_name']
+
         ];
     }
 } else {
@@ -44,6 +42,7 @@ $conn->close();
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -53,7 +52,8 @@ $conn->close();
     <!-- Link to Google Fonts for Montserrat -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
         /* Apply Montserrat font globally */
@@ -62,6 +62,7 @@ $conn->close();
         }
     </style>
 </head>
+
 <body>
     <?php include 'reusables/navbar.php'; ?>
 
@@ -71,20 +72,23 @@ $conn->close();
         <div class="container bg-cream" style="margin-top:3rem;">
             <h1 class="mb-4">Shop Page</h1>
             <div id="book-list">
-                <?php 
+                <?php
                 // Render the books (fetched from the database)
                 foreach ($books_from_db as $book): ?>
                     <div class="row book-item">
                         <div class="col-md-2">
                             <?php if (!empty($book['photo'])): ?>
-                                <img src="<?= htmlspecialchars($book['photo']) ?>" alt="<?= htmlspecialchars($book['name']) ?>" class="img-fluid" style="max-height: 120px;">
+                                <img src="<?= htmlspecialchars($book['photo']) ?>" alt="<?= htmlspecialchars($book['name']) ?>"
+                                    class="img-fluid" style="max-height: 120px;">
                             <?php else: ?>
                                 <div class="book-photo">No Photo Available</div>
                             <?php endif; ?>
                         </div>
 
                         <div class="col-md-8 book-details">
-                            <h4><a href="bookdetails.php?name=<?= urlencode($book['name']) ?>&author=<?= urlencode($book['author']) ?>&language=<?= urlencode($book['language']) ?>&pages=<?= $book['pages'] ?>&photo=<?= urlencode($book['photo']) ?>"><?= htmlspecialchars($book['name']) ?></a></h4>
+                            <h4><a
+                                    href="bookdetails.php?name=<?= urlencode($book['name']) ?>&author=<?= urlencode($book['author']) ?>&language=<?= urlencode($book['language']) ?>&pages=<?= $book['pages'] ?>&photo=<?= urlencode($book['photo']) ?>&genre=<?= urlencode($book['genre']) ?>"><?= htmlspecialchars($book['name']) ?></a>
+                            </h4>
                             <p>Author: <?= htmlspecialchars($book['author']) ?></p>
                             <p>Language: <?= htmlspecialchars($book['language']) ?></p>
                             <p>Pages: <?= htmlspecialchars($book['pages']) ?></p>
@@ -108,4 +112,5 @@ $conn->close();
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

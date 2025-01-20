@@ -50,7 +50,7 @@
                 <div class="row">
                     <div class="col">
                         <h2>Why Choose Us?</h2>
-                        <p>We offer a wide range of books at affordable prices with secure online payments and excellent
+                        <p>We offer a wide range of books at affordable prices with excellent
                             customer support.</p>
                     </div>
                 </div>

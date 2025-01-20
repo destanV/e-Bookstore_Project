@@ -33,6 +33,14 @@ if (isset($_POST['add_book'])) {
         !empty($page) &&
         !empty($language)
     ) {
+        // Validate year: ensure it is a 4-digit number
+        if (is_numeric($year) && strlen($year) == 4 && $year >= 1000 && $year <= 9999) {
+            // Year is valid
+        } else {
+            // If year is invalid, set default to current year
+            $year = date('Y');  // Use the current year
+        }
+
         //insert directly into table
         $preparedInsertStatement = $mysqli->prepare("
             INSERT INTO books (book_name, release_year, numberOfPages)
@@ -68,7 +76,7 @@ if (isset($_POST['add_book'])) {
         //------------------------------------------------------
         // handle genre
         $genre_id = null;
-        $genreSelectStatement = $mysqli->prepare("SELECT genre_id FROM genres WHERE name = ? ");
+        $genreSelectStatement = $mysqli->prepare("SELECT genre_id FROM genres WHERE genre_name = ? ");
         $genreSelectStatement->bind_param("s", $genre);
         $genreSelectStatement->execute();
         $genreCheckResult = $genreSelectStatement->get_result();
@@ -77,7 +85,7 @@ if (isset($_POST['add_book'])) {
             $genre_id = $row['genre_id'];
         } else {
             $genreInsertStatement = $mysqli->prepare("
-                INSERT INTO genres (name)
+                INSERT INTO genres (genre_name)
                 VALUES (?)
             ");
             $genreInsertStatement->bind_param("s", $genre);
